@@ -41,10 +41,9 @@ void Spaceship::MoveLeft(){
 
 void Spaceship::MoveRight(){
     position.x+=velocity.x;
-    float shipWidth = spaceshipSprite.width * scale;
 
-    if(position.x + shipWidth>GetScreenWidth()){
-        position.x = GetScreenWidth() - shipWidth;
+    if(position.x + GetWidth()>GetScreenWidth()){
+        position.x = GetScreenWidth() - GetWidth();
     }
 }
 
