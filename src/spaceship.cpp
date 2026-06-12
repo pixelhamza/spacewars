@@ -1,5 +1,5 @@
 #include "spaceship.hpp"
-
+#define SHOOT_INTERVAL 0.35
 Spaceship::Spaceship(){
     spaceshipSprite = LoadTexture("assets/texture/spaceship.png");
     scale = 0.25f; 
@@ -7,6 +7,7 @@ Spaceship::Spaceship(){
     position.y = GetScreenHeight() - spaceshipSprite.height * scale -15;
     velocity.x = 7; 
     velocity.y = 0;
+    lastFireTime = 0.0;
 
 }
 
@@ -48,7 +49,10 @@ void Spaceship::MoveRight(){
 }
 
 void Spaceship::ShootBullet(){
+    if(GetTime() - lastFireTime >= SHOOT_INTERVAL){
     bullets.push_back(Bullet({position.x + GetWidth()/2 -2,position.y},-7));
+    lastFireTime = GetTime();
+    }
 
 }
 
