@@ -10,3 +10,6 @@ void Bullet::Draw(){
     DrawRectangleGradientV(position.x, position.y, 4, 16, WHITE, YELLOW);
 }
 
+void Bullet::Update(){ 
+    position.y+= speed ;
+}
