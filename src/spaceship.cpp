@@ -47,3 +47,8 @@ void Spaceship::MoveRight(){
     }
 }
 
+void Spaceship::ShootBullet(){
+    bullets.push_back(Bullet({position.x + GetWidth()/2 -2,position.y},-7));
+
+}
+

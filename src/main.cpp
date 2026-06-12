@@ -10,6 +10,7 @@ int main()
     Game game;
     while (!WindowShouldClose())
     {   game.HandleInput();
+        game.UpdatePos();
         BeginDrawing();
             ClearBackground(BLACK);
             DrawText("SPACEWARS", 320, 280, 20, WHITE);

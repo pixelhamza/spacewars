@@ -10,7 +10,7 @@ class Spaceship{
         void Draw();
         void MoveLeft();
         void MoveRight();
-        void ShootLaser();
+        void ShootBullet();
         float GetHeight() const;
         float GetWidth() const ;
         std::vector<Bullet> bullets;
