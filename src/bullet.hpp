@@ -6,9 +6,9 @@ class Bullet{
         Bullet(Vector2 position,float speed); 
         void Draw();
         void Update();
+        bool active;
 
     private: 
         Vector2 position; 
         float speed;
-        bool active;
 };
