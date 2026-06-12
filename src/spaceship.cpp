@@ -14,6 +14,16 @@ Spaceship::~Spaceship(){
     UnloadTexture(spaceshipSprite);
 } 
 
+float Spaceship::GetWidth() const
+{
+    return spaceshipSprite.width * scale;
+}
+
+float Spaceship::GetHeight() const
+{
+    return spaceshipSprite.height * scale;
+}
+
 void Spaceship::Draw(){
 
     DrawTextureEx(
@@ -37,3 +47,4 @@ void Spaceship::MoveRight(){
         position.x = GetScreenWidth() - shipWidth;
     }
 }
+
