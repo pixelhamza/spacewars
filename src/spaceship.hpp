@@ -18,7 +18,6 @@ class Spaceship{
         Texture2D spaceshipSprite;
         Vector2 position;
         Vector2 velocity;
-        float scale ;
         double lastFireTime;
 
 

@@ -2,9 +2,8 @@
 #define SHOOT_INTERVAL 0.35
 Spaceship::Spaceship(){
     spaceshipSprite = LoadTexture("assets/texture/spaceship.png");
-    scale = 0.25f; 
-    position.x = (GetScreenWidth() - spaceshipSprite.width * scale) / 2.0f;
-    position.y = GetScreenHeight() - spaceshipSprite.height * scale -15;
+    position.x = (GetScreenWidth() - spaceshipSprite.width) / 2.0f;
+    position.y = GetScreenHeight() - spaceshipSprite.height -15;
     velocity.x = 7; 
     velocity.y = 0;
     lastFireTime = 0.0;
@@ -17,23 +16,16 @@ Spaceship::~Spaceship(){
 
 float Spaceship::GetWidth() const
 {
-    return spaceshipSprite.width * scale;
+    return spaceshipSprite.width;
 }
 
 float Spaceship::GetHeight() const
 {
-    return spaceshipSprite.height * scale;
+    return spaceshipSprite.height;
 }
 
 void Spaceship::Draw(){
-
-    DrawTextureEx(
-        spaceshipSprite,
-        position,
-        0.0f,
-        scale, 
-        WHITE
-    ); 
+    DrawTextureV(spaceshipSprite,position,WHITE);
 }
 void Spaceship::MoveLeft(){
     position.x-=velocity.x;
