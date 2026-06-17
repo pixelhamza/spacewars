@@ -6,3 +6,7 @@ Alien::Alien(Vector2 position,AlienType type,
     this->position = position;
     this->image = textures.at(type);
 }
+
+void Alien::Draw(){ 
+    DrawTextureV(image,position,WHITE);
+}
