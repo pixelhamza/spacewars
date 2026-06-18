@@ -15,3 +15,14 @@ void Alien::Update(int direction){
     position.x+=direction;
 
 }
+Vector2 Alien::GetPosition() const {
+    return position;
+}
+
+bool Alien::IsAlive() const {
+    return alive;
+}
+
+void Alien::Kill() {
+    alive = false;
+}
