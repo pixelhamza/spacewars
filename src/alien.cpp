@@ -11,9 +11,9 @@ void Alien::Draw(){
     DrawTextureV(image,position,WHITE);
 }
 
-void Alien::Update(int direction){ 
-    position.x+=direction;
-
+void Alien::Update(float dx, float dy) {
+    position.x += dx;
+    position.y += dy;
 }
 Vector2 Alien::GetPosition() const {
     return position;

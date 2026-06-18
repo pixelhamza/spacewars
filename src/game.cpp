@@ -27,7 +27,7 @@ void Game::UpdatePos(){
 
     }
     DeleteInactiveBullets();
-    std::cout<<"Vector size : "<< spaceship.bullets.size()<<"\n";
+    MoveAliens();
 
 }
 void Game:: Draw(){ 
@@ -83,11 +83,36 @@ std::vector<std::unique_ptr<Alien>> Game::CreateAliens(){
         else type = AlienType::Octopus;
 
         for(size_t col{};col<11;col++){ 
-            Vector2 pos = {75.0f + col * 55.0f,100.0f+ row*55.0f};
+            Vector2 pos = {75.0f + col * 55.0f,50.0f+ row*55.0f};
             aliens.push_back(std::make_unique<Alien>(pos,type,alienTextures));
         }
     }
     return aliens;
 }
 
-   
+void Game::MoveAliens() {
+    for (auto& alien : aliens) {
+        if (!alien->IsAlive()) continue;
+
+        if (alien->GetPosition().x + 48 >= GetScreenWidth() && alienDirection == 1) {
+            alienDirection = -1;
+            DropAliens();
+            break;
+        }
+        if (alien->GetPosition().x <= 0 && alienDirection == -1) {
+            alienDirection = 1;
+            DropAliens();
+            break;
+        }
+    }
+
+    for (auto& alien : aliens) {
+        if (alien->IsAlive()) alien->Update(alienDirection * alienSpeed, 0);
+    }
+}
+
+void Game::DropAliens() {
+    for (auto& alien : aliens) {
+        if (alien->IsAlive()) alien->Update(0, 4);
+    }
+}

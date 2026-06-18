@@ -7,7 +7,7 @@ enum class AlienType{Squid = 1, Crab , Octopus};
 class Alien {
     public: 
         Alien(Vector2 position,AlienType type,const std::map<AlienType,Texture2D>&textures);
-        void Update(int direction); 
+        void Update(float dx, float dy); 
         void Draw(); 
         bool IsAlive() const;
         void Kill();
