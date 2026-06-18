@@ -10,7 +10,6 @@ class Alien {
         void Update(); 
         void Draw(); 
         AlienType GetType() const;
-        Texture2D alienSprite; 
     private: 
         Vector2 position;
         AlienType type;

@@ -16,6 +16,7 @@ class Game{
         void DeleteInactiveBullets();
     private: 
     std::vector<Obstacle> CreateObstacles();
+    std::vector<std::unique_ptr<Alien>> CreateAliens();
     Spaceship spaceship;
     std::vector<Obstacle> obstacles;
 

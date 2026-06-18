@@ -6,8 +6,10 @@ Game::Game(){
     obstacles = CreateObstacles(); 
     alienTextures[AlienType::Crab] = LoadTexture("assets/texture/crab.png");
     alienTextures[AlienType::Octopus] = LoadTexture("assets/texture/octopus.png");
+    alienTextures[AlienType::Squid] = LoadTexture("assets/texture/squid.png");
 
-    aliens.push_back(std::make_unique<Alien>(Vector2{100,200},AlienType::Crab,alienTextures));
+    aliens = CreateAliens();
+
 
 
 }
@@ -69,6 +71,23 @@ std::vector<Obstacle> Game::CreateObstacles(){
     }
     return obstacles;
     
+}
+
+std::vector<std::unique_ptr<Alien>> Game::CreateAliens(){ 
+    std::vector<std::unique_ptr<Alien>> aliens;
+
+    for(size_t row{};row< 5;row++){
+        AlienType type;
+        if(row==0) type = AlienType::Squid;
+        else if(row<=2)type = AlienType::Crab;
+        else type = AlienType::Octopus;
+
+        for(size_t col{};col<11;col++){ 
+            Vector2 pos = {75.0f + col * 55.0f,100.0f+ row*55.0f};
+            aliens.push_back(std::make_unique<Alien>(pos,type,alienTextures));
+        }
+    }
+    return aliens;
 }
 
    
