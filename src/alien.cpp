@@ -10,3 +10,8 @@ Alien::Alien(Vector2 position,AlienType type,
 void Alien::Draw(){ 
     DrawTextureV(image,position,WHITE);
 }
+
+void Alien::Update(int direction){ 
+    position.x+=direction;
+
+}
