@@ -66,7 +66,7 @@ std::vector<Obstacle> Game::CreateObstacles(){
     for (size_t i{}; i <3 ; i++)
     {
         float offsetX = (i + 1) * gap + i * obstacle_width;
-        obstacles.push_back(Obstacle({offsetX, float(GetScreenHeight() - 200)}));
+        obstacles.push_back(Obstacle({offsetX, float(GetScreenHeight() - 150)}));
 
     }
     return obstacles;
