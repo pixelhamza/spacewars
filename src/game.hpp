@@ -3,6 +3,7 @@
 #include "obstacle.hpp"
 #include "alien.hpp"
 #include "bullet.hpp"
+#include "mysteryship.hpp"
 #include<memory>
 #include<vector>
 #include<map> 
@@ -32,4 +33,13 @@ class Game{
     int alienDirection = 1; //1 right -1 left
     constexpr static float alienLaserShootInterval = 0.50;
     float lastTimeAlienFired;
+
+
+    std::unique_ptr<MysteryShip> mysteryShip = nullptr;
+    Texture2D mysteryShipTexture;
+    float lastMysteryShipSpawn = 0.0f;
+    float mysteryShipSpawnInterval = 30.0;
+
+    void UpdateMysteryShip();
+    void SpawnMysteryShip();
 };

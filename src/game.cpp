@@ -7,7 +7,7 @@ Game::Game(){
     alienTextures[AlienType::Crab] = LoadTexture("assets/texture/crab.png");
     alienTextures[AlienType::Octopus] = LoadTexture("assets/texture/octopus.png");
     alienTextures[AlienType::Squid] = LoadTexture("assets/texture/squid.png");
-
+    mysteryShipTexture = LoadTexture("assets/texture/mystery.png");
     aliens = CreateAliens();
     lastTimeAlienFired = 0;
 
@@ -19,6 +19,7 @@ Game::~Game(){
     for(auto &[type, texture] : alienTextures){
         UnloadTexture(texture);
     }
+    UnloadTexture(mysteryShipTexture);
 }
 
 
@@ -34,6 +35,7 @@ void Game::UpdatePos(){
 
     AlienShootLaser();
     MoveAliens();
+    UpdateMysteryShip();
 
 }
 void Game:: Draw(){ 
@@ -48,6 +50,7 @@ void Game:: Draw(){
 
     for(auto &alien : aliens) alien->Draw();
     for(auto &alienBullet : alienLasers) alienBullet.Draw();
+    if(mysteryShip)mysteryShip->Draw();
 }
 
 void Game::HandleInput(){ 
@@ -145,4 +148,23 @@ void Game::AlienShootLaser(){
         }
         lastTimeAlienFired = GetTime();
     }
+}
+
+void Game::UpdateMysteryShip() {
+    double curr_time = GetTime();
+    if (!mysteryShip && curr_time - lastMysteryShipSpawn >= mysteryShipSpawnInterval) {
+        SpawnMysteryShip();
+        lastMysteryShipSpawn = GetTime();
+    }
+
+    if (mysteryShip) {
+        mysteryShip->Update();
+        if (!mysteryShip->IsActive()) {
+            mysteryShip.reset();
+        }
+    }
+}
+
+void Game::SpawnMysteryShip() {
+    mysteryShip = std::make_unique<MysteryShip>(Vector2{0, 30}, mysteryShipTexture);
 }
