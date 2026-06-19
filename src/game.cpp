@@ -26,7 +26,12 @@ void Game::UpdatePos(){
         bullet.Update();
 
     }
+    for(auto &bullet: alienLasers){
+        bullet.Update();
+    }
     DeleteInactiveBullets();
+
+    AlienShootLaser();
     MoveAliens();
 
 }
@@ -41,6 +46,7 @@ void Game:: Draw(){
     for(auto &obstacle : obstacles) obstacle.Draw();
 
     for(auto &alien : aliens) alien->Draw();
+    for(auto &alienBullet : alienLasers) alienBullet.Draw();
 }
 
 void Game::HandleInput(){ 
@@ -54,6 +60,13 @@ void Game::DeleteInactiveBullets(){
     for(auto it=spaceship.bullets.begin();it!=spaceship.bullets.end();){ 
         if(!it->active){ 
            it = spaceship.bullets.erase(it);
+        }
+        else ++it;
+    }
+
+    for(auto it = alienLasers.begin();it!=alienLasers.end();){
+        if(!it->active){
+            it = alienLasers.erase(it);
         }
         else ++it;
     }
@@ -114,5 +127,17 @@ void Game::MoveAliens() {
 void Game::DropAliens() {
     for (auto& alien : aliens) {
         if (alien->IsAlive()) alien->Update(0, 4);
+    }
+}
+
+void Game::AlienShootLaser(){ 
+    if (aliens.empty()) return;
+    int random_index = GetRandomValue(0, static_cast<int>(aliens.size()) - 1);
+    size_t idx = static_cast<size_t>(random_index);
+    if (aliens[idx] && aliens[idx]->IsAlive()) {
+        Vector2 alienPos = aliens[idx]->GetPosition();
+        Vector2 laserPos = {alienPos.x + 24 - 2, alienPos.y + 48};
+        alienLasers.push_back(Bullet(alienPos,6));
+
     }
 }
