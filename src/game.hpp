@@ -30,4 +30,6 @@ class Game{
     void AlienShootLaser();
     float alienSpeed = 0.5f;
     int alienDirection = 1; //1 right -1 left
+    constexpr static float alienLaserShootInterval = 0.50;
+    float lastTimeAlienFired;
 };

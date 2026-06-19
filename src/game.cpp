@@ -9,6 +9,7 @@ Game::Game(){
     alienTextures[AlienType::Squid] = LoadTexture("assets/texture/squid.png");
 
     aliens = CreateAliens();
+    lastTimeAlienFired = 0;
 
 
 
@@ -131,13 +132,17 @@ void Game::DropAliens() {
 }
 
 void Game::AlienShootLaser(){ 
-    if (aliens.empty()) return;
-    int random_index = GetRandomValue(0, static_cast<int>(aliens.size()) - 1);
-    size_t idx = static_cast<size_t>(random_index);
-    if (aliens[idx] && aliens[idx]->IsAlive()) {
-        Vector2 alienPos = aliens[idx]->GetPosition();
-        Vector2 laserPos = {alienPos.x + 24 - 2, alienPos.y + 48};
-        alienLasers.push_back(Bullet(alienPos,6));
 
+    double curr_time = GetTime();
+    if(curr_time - lastTimeAlienFired >= alienLaserShootInterval && !aliens.empty()){
+        int random_index = GetRandomValue(0, static_cast<int>(aliens.size()) - 1);
+        size_t idx = static_cast<size_t>(random_index);
+        if (aliens[idx] && aliens[idx]->IsAlive()) {
+            Vector2 alienPos = aliens[idx]->GetPosition();
+            Vector2 laserPos = {alienPos.x + 24, alienPos.y + 48};
+            alienLasers.push_back(Bullet(laserPos,6));
+
+        }
+        lastTimeAlienFired = GetTime();
     }
 }
