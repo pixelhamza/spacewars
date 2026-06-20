@@ -16,6 +16,7 @@ class Game{
         void UpdatePos();
         void HandleInput();
         void DeleteInactiveBullets();
+        void CheckCollisions();
     private: 
     std::vector<Obstacle> CreateObstacles();
     std::vector<std::unique_ptr<Alien>> CreateAliens();

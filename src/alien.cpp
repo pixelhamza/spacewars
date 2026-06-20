@@ -8,7 +8,7 @@ Alien::Alien(Vector2 position,AlienType type,
 }
 
 void Alien::Draw(){ 
-    DrawTextureV(image,position,WHITE);
+    if(alive) DrawTextureV(image,position,WHITE);
 }
 
 void Alien::Update(float dx, float dy) {

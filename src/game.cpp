@@ -35,6 +35,7 @@ void Game::UpdatePos(){
 
     AlienShootLaser();
     MoveAliens();
+    CheckCollisions();
     UpdateMysteryShip();
 
 }
@@ -167,4 +168,22 @@ void Game::UpdateMysteryShip() {
 
 void Game::SpawnMysteryShip() {
     mysteryShip = std::make_unique<MysteryShip>(Vector2{0, 30}, mysteryShipTexture);
+}
+
+void Game::CheckCollisions(){
+    for(auto &bullet:spaceship.bullets){
+        if(!bullet.active)continue;
+
+        for(auto &alien : aliens){
+            if(!alien->IsAlive())continue;
+            if(CheckCollisionRecs(bullet.GetRect(),alien->GetRect())){
+                std::cout<<"alien hit \n";
+                alien->Kill();
+                bullet.active = false;
+                //TODO:  ADD scoring
+                break;
+
+            }
+        }
+    }
 }
