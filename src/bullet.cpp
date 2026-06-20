@@ -24,3 +24,8 @@ void Bullet::Update(){
     }
 }
 
+Rectangle Bullet::GetRect() const {
+    return Rectangle{position.x, position.y, 4, 16};
+}
+
+

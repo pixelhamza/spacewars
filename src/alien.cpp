@@ -26,3 +26,7 @@ bool Alien::IsAlive() const {
 void Alien::Kill() {
     alive = false;
 }
+
+Rectangle Alien :: GetRect() const{
+    return Rectangle{position.x,position.y,(float)image.width,(float)image.height};
+}

@@ -12,6 +12,7 @@ class Alien {
         bool IsAlive() const;
         void Kill();
         Vector2 GetPosition() const;
+        Rectangle GetRect() const;
     private: 
         Vector2 position;
         AlienType type;

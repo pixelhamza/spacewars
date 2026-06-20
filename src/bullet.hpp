@@ -7,6 +7,7 @@ class Bullet{
         void Draw();
         void Update();
         bool active;
+        Rectangle GetRect()const;
 
     private: 
         Vector2 position; 
