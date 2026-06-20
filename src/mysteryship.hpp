@@ -9,6 +9,7 @@ class MysteryShip{
         bool IsActive() const; 
         void Deactivate();
         Vector2 GetPosition() const;
+        Rectangle GetRect() const;
     private:
         Vector2 position; 
         Texture2D image;

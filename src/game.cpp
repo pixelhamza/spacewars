@@ -200,6 +200,13 @@ void Game::CheckCollisions(){
 
             }
         }
+        //spaceship-mysteryship collision
+        if(mysteryShip && CheckCollisionRecs(mysteryShip->GetRect(),bullet.GetRect())){
+            std::cout<<"Mysteryship hit\n";
+            bullet.active = false;
+            mysteryShip->Deactivate();
+            //TODO Points
+        } 
     }
 
      for(auto &bullet:alienLasers){

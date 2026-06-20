@@ -17,3 +17,7 @@ void MysteryShip::Update(){
 bool MysteryShip::IsActive() const { return active; }
 void MysteryShip::Deactivate() { active = false; }
 Vector2 MysteryShip::GetPosition() const { return position; }
+
+Rectangle MysteryShip::GetRect() const{
+    return Rectangle{position.x,position.y,(float)image.width,(float)image.height};
+}
