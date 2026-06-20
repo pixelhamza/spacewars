@@ -175,9 +175,22 @@ void Game::SpawnMysteryShip() {
 void Game::CheckCollisions(){
     for(auto &bullet:spaceship.bullets){
         if(!bullet.active)continue;
-
+        //spaceshipbullet-obstacle collision
+        for (auto& obstacle : obstacles) {
+            for (auto& block : obstacle.blocks) {
+                if (!block.active) continue;
+                if (CheckCollisionRecs(bullet.GetRect(), block.GetRect())) {
+                    block.active = false;
+                    bullet.active = false;
+                    break;
+                }
+            }
+        }
+        //bullet-alien collision 
         for(auto &alien : aliens){
             if(!alien->IsAlive())continue;
+             
+            
             if(CheckCollisionRecs(bullet.GetRect(),alien->GetRect())){
                 std::cout<<"alien hit \n";
                 alien->Kill();
@@ -188,8 +201,21 @@ void Game::CheckCollisions(){
             }
         }
     }
+
      for(auto &bullet:alienLasers){
         if(!bullet.active)continue;
+            //alienbullet to obstacle collision
+            for (auto& obstacle : obstacles) {
+                for (auto& block : obstacle.blocks) {
+                    if (!block.active) continue;
+                    if (CheckCollisionRecs(bullet.GetRect(), block.GetRect())) {
+                        block.active = false;
+                        bullet.active = false;
+                        break;
+                    }
+                }
+            }
+        //spaceship-bullet collision
         if(CheckCollisionRecs(bullet.GetRect(),spaceship.GetRect())){
             std::cout<<"Ship hit\n";
             bullet.active = false;
