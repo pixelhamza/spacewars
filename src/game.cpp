@@ -38,6 +38,7 @@ void Game::UpdatePos(){
     CheckCollisions();
     UpdateMysteryShip();
     ShipRespawn();
+    UpdateDifficulty();
     
 
 }
@@ -244,4 +245,20 @@ void Game::ShipRespawn(){
         }
     }
 
+}
+
+//recalculate difficulty based on remaining aliens
+void Game::UpdateDifficulty() {
+    int aliveCount = 0;
+    for (auto& alien : aliens) {
+        if (alien->IsAlive()) aliveCount++;
+    }
+
+    int totalAliens = 55; 
+    float ratio = (float)aliveCount / totalAliens; 
+
+    // fewer aliens=faster shooting and faster movement
+    alienLaserShootInterval = 0.2f + (ratio * 0.5f); 
+    alienSpeed = 0.5f + ((1.0f - ratio) * 2.0f);
+    // speeds up as they die
 }
