@@ -1,12 +1,15 @@
 #include "spaceship.hpp"
 #define SHOOT_INTERVAL 0.35
+#define INITIAL_POSITION_X (GetScreenWidth() - spaceshipSprite.width) / 2.0f;
+#define INITIAL_POSITION_Y GetScreenHeight() - spaceshipSprite.height -15;
 Spaceship::Spaceship(){
     spaceshipSprite = LoadTexture("assets/texture/spaceship.png");
-    position.x = (GetScreenWidth() - spaceshipSprite.width) / 2.0f;
-    position.y = GetScreenHeight() - spaceshipSprite.height -15;
+    position.x =  INITIAL_POSITION_X;
+    position.y = INITIAL_POSITION_Y;
     velocity.x = 7; 
     velocity.y = 0;
     lastFireTime = 0.0;
+    alive = true ;
 
 }
 
@@ -25,7 +28,7 @@ float Spaceship::GetHeight() const
 }
 
 void Spaceship::Draw(){
-    DrawTextureV(spaceshipSprite,position,WHITE);
+    if(alive) DrawTextureV(spaceshipSprite,position,WHITE);
 }
 void Spaceship::MoveLeft(){
     position.x-=velocity.x;
@@ -46,5 +49,21 @@ void Spaceship::ShootBullet(){
     lastFireTime = GetTime();
     }
 
+}
+Rectangle Spaceship::GetRect() const {
+    return Rectangle{position.x,position.y,float(spaceshipSprite.width),(float)spaceshipSprite.height};
+}
+
+void Spaceship::Respawn(){
+    alive = true;
+    position.x = INITIAL_POSITION_X;
+    position.y = INITIAL_POSITION_Y;
+
+}
+bool Spaceship::IsAlive(){
+    return alive;
+}
+void Spaceship::Death(){
+    alive = false;
 }
 

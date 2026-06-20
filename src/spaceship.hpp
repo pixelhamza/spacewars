@@ -13,12 +13,19 @@ class Spaceship{
         void ShootBullet();
         float GetHeight() const;
         float GetWidth() const ;
+        Rectangle GetRect() const;
         std::vector<Bullet> bullets;
+        void Respawn();
+        bool IsAlive();
+        void Death();
+        
     private: 
         Texture2D spaceshipSprite;
         Vector2 position;
         Vector2 velocity;
         double lastFireTime;
+        bool alive;
+
 
 
 

@@ -37,6 +37,8 @@ void Game::UpdatePos(){
     MoveAliens();
     CheckCollisions();
     UpdateMysteryShip();
+    ShipRespawn();
+    
 
 }
 void Game:: Draw(){ 
@@ -186,4 +188,27 @@ void Game::CheckCollisions(){
             }
         }
     }
+     for(auto &bullet:alienLasers){
+        if(!bullet.active)continue;
+        if(CheckCollisionRecs(bullet.GetRect(),spaceship.GetRect())){
+            std::cout<<"Ship hit\n";
+            bullet.active = false;
+            spaceship.Death();
+            //TODO : Lose 1 life;
+            break;
+        }
+
+    }
+}
+
+void Game::ShipRespawn(){
+    if(!spaceship.IsAlive()){
+        spawnTimer += GetFrameTime();
+        if(spawnTimer>=shipSpawnInterval){
+            std::cout<<"Ship Respawned";
+            spaceship.Respawn();
+            spawnTimer =  0.0f;
+        }
+    }
+
 }

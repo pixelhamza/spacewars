@@ -43,4 +43,8 @@ class Game{
 
     void UpdateMysteryShip();
     void SpawnMysteryShip();
+    void ShipRespawn();
+
+    constexpr static float shipSpawnInterval = 3.0;
+    float spawnTimer = 0.0f;
 };
