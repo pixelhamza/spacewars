@@ -24,6 +24,8 @@ Game::~Game(){
 
 
 void Game::UpdatePos(){ 
+    if(state == GameState::GameOver)return;
+
     for(auto &bullet: spaceship.bullets){ 
         bullet.Update();
 
@@ -43,6 +45,10 @@ void Game::UpdatePos(){
 
 }
 void Game:: Draw(){ 
+    if(state == GameState::GameOver){
+        DrawGameOver();
+        return;
+    }
     spaceship.Draw();
 
     for(auto &bullet  : spaceship.bullets){ 
@@ -57,7 +63,35 @@ void Game:: Draw(){
     if(mysteryShip)mysteryShip->Draw();
 }
 
+void Game::DrawGameOver(){
+    DrawText("GAME OVER", GetScreenWidth()/2 - 150, 280, 60, RED);
+    //TODO: GAME OVER SCREEN DESIGNING
+}
+
+void Game::ResetGame(){
+    aliens = CreateAliens();
+    obstacles = CreateObstacles();
+    spaceship.Respawn();
+    score = 0;
+    lives = 3;
+    spaceship.bullets.clear();
+    alienLasers.clear();
+    alienDirection = 1;
+    mysteryShip.reset();           
+    lastMysteryShipSpawn = GetTime();
+    state = GameState::Playing;
+
+    
+}
+
 void Game::HandleInput(){ 
+    if(state == GameState::GameOver){
+        if(IsKeyPressed(KEY_ENTER)){
+            ResetGame();
+        }
+        return;
+    }
+    if(!spaceship.IsAlive())return;
     if(IsKeyDown(KEY_LEFT)) spaceship.MoveLeft();
     else if(IsKeyDown(KEY_RIGHT)) spaceship.MoveRight();
     else if(IsKeyDown(KEY_SPACE))spaceship.ShootBullet();
@@ -228,7 +262,8 @@ void Game::CheckCollisions(){
             std::cout<<"Ship hit\n";
             bullet.active = false;
             spaceship.Death();
-            //TODO : Lose 1 life;
+            lives--;
+            if(lives<=0)state=GameState::GameOver;//GameOver
             break;
         }
 

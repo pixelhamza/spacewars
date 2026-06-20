@@ -8,6 +8,8 @@
 #include<vector>
 #include<map> 
 
+enum class GameState { Playing, GameOver };
+
 class Game{ 
     public: 
         Game(); 
@@ -18,6 +20,11 @@ class Game{
         void DeleteInactiveBullets();
         void CheckCollisions();
     private: 
+    GameState state = GameState::Playing;
+    int lives = 3 ;
+    int score = 0;
+    void DrawGameOver();
+    void ResetGame();
     std::vector<Obstacle> CreateObstacles();
     std::vector<std::unique_ptr<Alien>> CreateAliens();
     Spaceship spaceship;
