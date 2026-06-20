@@ -30,3 +30,16 @@ void Alien::Kill() {
 Rectangle Alien :: GetRect() const{
     return Rectangle{position.x,position.y,(float)image.width,(float)image.height};
 }
+
+int Alien::GetScoreValue() const{
+    switch (type)
+    {
+    case AlienType::Squid:
+        return 30;
+    case AlienType::Crab:
+        return 20; 
+    case AlienType::Octopus:
+        return 10;
+    }
+    return 0;
+}

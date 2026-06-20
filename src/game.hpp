@@ -25,6 +25,7 @@ class Game{
     int score = 0;
     void DrawGameOver();
     void ResetGame();
+    void DrawScoreUI();
     std::vector<Obstacle> CreateObstacles();
     std::vector<std::unique_ptr<Alien>> CreateAliens();
     Spaceship spaceship;

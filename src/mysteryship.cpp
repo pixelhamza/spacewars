@@ -21,3 +21,6 @@ Vector2 MysteryShip::GetPosition() const { return position; }
 Rectangle MysteryShip::GetRect() const{
     return Rectangle{position.x,position.y,(float)image.width,(float)image.height};
 }
+int MysteryShip::GetScoreValue() const{
+    return 100;
+}

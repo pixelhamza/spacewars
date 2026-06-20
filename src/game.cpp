@@ -49,6 +49,7 @@ void Game:: Draw(){
         DrawGameOver();
         return;
     }
+    DrawScoreUI();
     spaceship.Draw();
 
     for(auto &bullet  : spaceship.bullets){ 
@@ -227,20 +228,18 @@ void Game::CheckCollisions(){
              
             
             if(CheckCollisionRecs(bullet.GetRect(),alien->GetRect())){
-                std::cout<<"alien hit \n";
+                score +=alien->GetScoreValue();
                 alien->Kill();
                 bullet.active = false;
-                //TODO:  ADD scoring
                 break;
 
             }
         }
         //spaceship-mysteryship collision
         if(mysteryShip && CheckCollisionRecs(mysteryShip->GetRect(),bullet.GetRect())){
-            std::cout<<"Mysteryship hit\n";
+            score+=mysteryShip->GetScoreValue();
             bullet.active = false;
             mysteryShip->Deactivate();
-            //TODO Points
         } 
     }
 
@@ -296,4 +295,8 @@ void Game::UpdateDifficulty() {
     alienLaserShootInterval = 0.2f + (ratio * 0.5f); 
     alienSpeed = 0.5f + ((1.0f - ratio) * 2.0f);
     // speeds up as they die
+}
+
+void Game::DrawScoreUI() {
+    //TODO
 }

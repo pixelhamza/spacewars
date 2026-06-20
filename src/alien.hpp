@@ -13,6 +13,7 @@ class Alien {
         void Kill();
         Vector2 GetPosition() const;
         Rectangle GetRect() const;
+        int GetScoreValue() const;
     private: 
         Vector2 position;
         AlienType type;
