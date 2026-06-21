@@ -1,7 +1,7 @@
 # Spacewars
 
 <p align="center">
-  <img src="assets/misc/wip.gif" alt="Spacewars gameplay" width="266">
+  <img src="assets/misc/Gameplay.png" alt="Spacewars gameplay" width="266">
 </p>
 
 <p align="center">
