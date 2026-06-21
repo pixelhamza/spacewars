@@ -245,6 +245,7 @@ void Game::CheckCollisions(){
 
      for(auto &bullet:alienLasers){
         if(!bullet.active)continue;
+        if(!spaceship.IsAlive())continue;
             //alienbullet to obstacle collision
             for (auto& obstacle : obstacles) {
                 for (auto& block : obstacle.blocks) {
