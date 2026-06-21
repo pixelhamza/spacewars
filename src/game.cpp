@@ -298,5 +298,11 @@ void Game::UpdateDifficulty() {
 }
 
 void Game::DrawScoreUI() {
-    //TODO
+    DrawText("SCORE", 20, 8, 14, {180, 180, 60, 255});
+    DrawText(TextFormat("%05i", score), 20, 22, 22, YELLOW);
+
+    DrawText("LIVES", GetScreenWidth() - 100, 8, 14, {180, 180, 60, 255});
+    DrawText(TextFormat("%d", lives), GetScreenWidth() - 100, 22, 22, GREEN);
+
+    DrawLine(0, 45, GetScreenWidth(), 45, {60, 60, 70, 255});
 }
