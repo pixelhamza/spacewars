@@ -11,6 +11,7 @@ Game::Game(){
     aliens = CreateAliens();
     lastTimeAlienFired = 0;
     explosionTexture = LoadTexture("assets/texture/explosion.png");
+    backgroundTexture = LoadTexture("assets/texture/background.png");
 
 
 
@@ -22,6 +23,7 @@ Game::~Game(){
     }
     UnloadTexture(mysteryShipTexture);
     UnloadTexture(explosionTexture);
+    UnloadTexture(backgroundTexture);
 }
 
 
@@ -49,6 +51,8 @@ void Game::UpdatePos(){
 
 }
 void Game:: Draw(){ 
+
+    DrawTexture(backgroundTexture, 0, 0, WHITE);
     if(state == GameState::GameOver){
         DrawGameOver();
         return;

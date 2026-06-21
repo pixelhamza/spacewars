@@ -13,7 +13,7 @@ int main()
         game.UpdatePos();
         BeginDrawing();
             ClearBackground(BLACK);
-            DrawText("SPACEWARS", 320, 280, 20, WHITE);
+            
             game.Draw();
         EndDrawing();
     }

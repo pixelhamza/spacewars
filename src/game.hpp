@@ -25,6 +25,7 @@ class Game{
     private: 
     GameState state = GameState::Playing;
     AudioManager audio;
+    Texture2D backgroundTexture;
     int lives = 3 ;
     int score = 0;
     void DrawGameOver();
