@@ -10,6 +10,7 @@ Game::Game(){
     mysteryShipTexture = LoadTexture("assets/texture/mystery.png");
     aliens = CreateAliens();
     lastTimeAlienFired = 0;
+    explosionTexture = LoadTexture("assets/texture/explosion.png");
 
 
 
@@ -20,6 +21,7 @@ Game::~Game(){
         UnloadTexture(texture);
     }
     UnloadTexture(mysteryShipTexture);
+    UnloadTexture(explosionTexture);
 }
 
 
@@ -38,9 +40,11 @@ void Game::UpdatePos(){
     AlienShootLaser();
     MoveAliens();
     CheckCollisions();
+    HandleExplosions();
     UpdateMysteryShip();
     ShipRespawn();
     UpdateDifficulty();
+
     
 
 }
@@ -62,6 +66,7 @@ void Game:: Draw(){
     for(auto &alien : aliens) alien->Draw();
     for(auto &alienBullet : alienLasers) alienBullet.Draw();
     if(mysteryShip)mysteryShip->Draw();
+    for (auto& exp : explosions) exp.Draw();
 }
 
 void Game::DrawGameOver(){
@@ -230,6 +235,7 @@ void Game::CheckCollisions(){
             if(CheckCollisionRecs(bullet.GetRect(),alien->GetRect())){
                 score +=alien->GetScoreValue();
                 alien->Kill();
+                explosions.push_back(Explosion(alien->GetPosition(), explosionTexture, 48, 0.4f));
                 bullet.active = false;
                 break;
 
@@ -239,6 +245,7 @@ void Game::CheckCollisions(){
         if(mysteryShip && CheckCollisionRecs(mysteryShip->GetRect(),bullet.GetRect())){
             score+=mysteryShip->GetScoreValue();
             bullet.active = false;
+            explosions.push_back(Explosion(mysteryShip->GetPosition(),explosionTexture,48,0.4f));
             mysteryShip->Deactivate();
         } 
     }
@@ -262,6 +269,7 @@ void Game::CheckCollisions(){
             std::cout<<"Ship hit\n";
             bullet.active = false;
             spaceship.Death();
+            explosions.push_back(Explosion(spaceship.GetPos(),explosionTexture,48,0.2f));
             lives--;
             if(lives<=0)state=GameState::GameOver;//GameOver
             break;
@@ -306,4 +314,15 @@ void Game::DrawScoreUI() {
     DrawText(TextFormat("%d", lives), GetScreenWidth() - 100, 22, 22, GREEN);
 
     DrawLine(0, 45, GetScreenWidth(), 45, {60, 60, 70, 255});
+}
+
+void Game::HandleExplosions(){
+    for (auto& exp : explosions) exp.Update();
+    explosions.erase(
+    std::remove_if(explosions.begin(), explosions.end(),
+        [](const Explosion& e) { 
+            return e.IsFinished(); 
+        }),
+    explosions.end()
+    );
 }

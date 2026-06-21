@@ -18,6 +18,7 @@ class Spaceship{
         void Respawn();
         bool IsAlive();
         void Death();
+        Vector2 GetPos();
         
     private: 
         Texture2D spaceshipSprite;
@@ -25,6 +26,7 @@ class Spaceship{
         Vector2 velocity;
         double lastFireTime;
         bool alive;
+
 
 
 

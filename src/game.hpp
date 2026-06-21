@@ -7,6 +7,7 @@
 #include<memory>
 #include<vector>
 #include<map> 
+#include "explosion.hpp"
 
 enum class GameState { Playing, GameOver };
 
@@ -19,6 +20,7 @@ class Game{
         void HandleInput();
         void DeleteInactiveBullets();
         void CheckCollisions();
+        void HandleExplosions();
     private: 
     GameState state = GameState::Playing;
     int lives = 3 ;
@@ -58,4 +60,7 @@ class Game{
     float spawnTimer = 0.0f;
 
     void UpdateDifficulty();
+
+    Texture2D explosionTexture;
+    std::vector<Explosion> explosions;
 };

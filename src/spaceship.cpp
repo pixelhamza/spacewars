@@ -68,4 +68,7 @@ bool Spaceship::IsAlive(){
 void Spaceship::Death(){
     alive = false;
 }
+Vector2 Spaceship:: GetPos(){
+    return position;
+}
 
