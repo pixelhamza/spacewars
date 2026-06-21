@@ -43,13 +43,17 @@ void Spaceship::MoveRight(){
     }
 }
 
-void Spaceship::ShootBullet(){
+bool Spaceship::ShootBullet(){
     if(alive){
         if(GetTime() - lastFireTime >= SHOOT_INTERVAL){
-        bullets.push_back(Bullet({position.x + GetWidth()/2 -2,position.y},-7));
-        lastFireTime = GetTime();
+            bullets.push_back(Bullet({position.x + GetWidth()/2 -2,position.y},-7));
+            lastFireTime = GetTime();
+            return true; 
         }
+        return false;
+        
     }
+    return false;
 
 }
 Rectangle Spaceship::GetRect() const {

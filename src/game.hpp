@@ -8,6 +8,7 @@
 #include<vector>
 #include<map> 
 #include "explosion.hpp"
+#include "audiomanager.hpp"
 
 enum class GameState { Playing, GameOver };
 
@@ -23,6 +24,7 @@ class Game{
         void HandleExplosions();
     private: 
     GameState state = GameState::Playing;
+    AudioManager audio;
     int lives = 3 ;
     int score = 0;
     void DrawGameOver();

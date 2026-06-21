@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include <map>
 
-enum class SoundType { Shoot, AlienShoot, Explosion, MysteryShipFly, GameOver };
+enum class SoundType { Shoot, AlienShoot, Explosion, MysteryShipFly, GameOver,ShipExplode };
 
 class AudioManager {
     public:

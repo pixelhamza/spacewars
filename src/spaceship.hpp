@@ -10,7 +10,7 @@ class Spaceship{
         void Draw();
         void MoveLeft();
         void MoveRight();
-        void ShootBullet();
+        bool ShootBullet();
         float GetHeight() const;
         float GetWidth() const ;
         Rectangle GetRect() const;

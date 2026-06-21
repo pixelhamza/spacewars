@@ -7,6 +7,7 @@ AudioManager::AudioManager() {
     sounds[SoundType::Explosion]  = LoadSound("assets/sounds/explosion.wav");
     sounds[SoundType::MysteryShipFly] = LoadSound("assets/sounds/mystery.wav");
     sounds[SoundType::GameOver] = LoadSound("assets/sounds/gameover.wav");
+    sounds[SoundType::ShipExplode] = LoadSound("assets/sounds/shipexplosion.wav");
 }
 
 AudioManager::~AudioManager() {

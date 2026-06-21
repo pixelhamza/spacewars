@@ -100,7 +100,9 @@ void Game::HandleInput(){
     if(!spaceship.IsAlive())return;
     if(IsKeyDown(KEY_LEFT)) spaceship.MoveLeft();
     else if(IsKeyDown(KEY_RIGHT)) spaceship.MoveRight();
-    else if(IsKeyDown(KEY_SPACE))spaceship.ShootBullet();
+    else if(IsKeyDown(KEY_SPACE)){
+        if(spaceship.ShootBullet())audio.Play(SoundType::Shoot);
+    }
 
 }
 
@@ -236,6 +238,7 @@ void Game::CheckCollisions(){
                 score +=alien->GetScoreValue();
                 alien->Kill();
                 explosions.push_back(Explosion(alien->GetPosition(), explosionTexture, 48, 0.4f));
+                audio.Play(SoundType::Explosion);
                 bullet.active = false;
                 break;
 
@@ -246,6 +249,7 @@ void Game::CheckCollisions(){
             score+=mysteryShip->GetScoreValue();
             bullet.active = false;
             explosions.push_back(Explosion(mysteryShip->GetPosition(),explosionTexture,48,0.4f));
+            audio.Play(SoundType::ShipExplode);
             mysteryShip->Deactivate();
         } 
     }
@@ -270,6 +274,7 @@ void Game::CheckCollisions(){
             bullet.active = false;
             spaceship.Death();
             explosions.push_back(Explosion(spaceship.GetPos(),explosionTexture,48,0.2f));
+            audio.Play(SoundType::ShipExplode);
             lives--;
             if(lives<=0)state=GameState::GameOver;//GameOver
             break;
